@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import DashboardNav from '@/components/ui/dashboard/nav';
-
+import MobileNav from '@/components/ui/dashboard/mobile-nav';
 export default function DashboardLayout({
   children,
 }: Readonly<{
@@ -11,6 +11,7 @@ export default function DashboardLayout({
       {/* header */}
       <header className="sticky top-0 z-40 border-b bg-bac">
         <div className="container flex items-center h-16 px-4">
+          <MobileNav />
           <Link href="/">
             <h1 className="text-1g font-bold">AI Image Generator</h1>
           </Link>
