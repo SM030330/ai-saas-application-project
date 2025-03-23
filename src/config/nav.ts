@@ -14,7 +14,7 @@ export const navItems: NavItem[] = [
   },
   {
     title: '画像削除',
-    href: '/dashboard/tools/remova-bg',
+    href: '/dashboard/tools/remove-bg',
     icon: Layers,
   },
   {
