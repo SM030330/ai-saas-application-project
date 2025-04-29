@@ -1,14 +1,14 @@
 import axios from 'axios';
 import FormData from 'form-data';
 import { NextResponse } from 'next/server';
+import sharp from 'sharp';
 
 export async function POST(req: Request) {
   const { keyword } = await req.json();
-  console.log(keyword);
 
   try {
     const payload = {
-      prompt: 'Lighthouse on a cliff overlooking the ocean',
+      prompt: `Create Image whith ${keyword}`,
       output_format: 'png',
     };
 
@@ -33,10 +33,17 @@ export async function POST(req: Request) {
       throw new Error(`API error: ${response.status}`);
     }
 
-    console.log(response.data);
-    return NextResponse.json({
-      data: response.data,
-    });
+    // 画像の最適化
+    const optimizedImage = await sharp(response.data)
+      .resize(1280, 720)
+      .png({ quality: 80, compressionLevel: 9 })
+      .toBuffer();
+
+    // const base64Image = Buffer.from(response.data).toString('base64');
+    const base64Image = optimizedImage.toString('base64');
+    const imageUrl = `data:image/png;base64,${base64Image}`;
+
+    return NextResponse.json({ imageUrl });
   } catch (error) {
     return NextResponse.json(
       {
