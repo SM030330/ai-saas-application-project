@@ -1,6 +1,7 @@
-import Link from 'next/link';
-import DashboardNav from '@/components/ui/dashboard/nav';
 import MobileNav from '@/components/ui/dashboard/mobile-nav';
+import DashboardNav from '@/components/ui/dashboard/nav';
+import { Toaster } from '@/components/ui/sonner';
+import Link from 'next/link';
 export default function DashboardLayout({
   children,
 }: Readonly<{
@@ -30,6 +31,8 @@ export default function DashboardLayout({
         {/* main contents */}
         <main className="flex w-full flex-col overflow-hidden p-4">{children}</main>
       </div>
+
+      <Toaster />
     </div>
   );
 }
